@@ -13,7 +13,7 @@
       rel="stylesheet"
     />
     <script
-      src="https://kit.fontawesome.com/4c536a6bd5.js"
+      src="https://kit.fontawesome.com/9dd285f231.js"
       crossorigin="anonymous"
     ></script>
     <script src="script.js" defer></script>
@@ -23,8 +23,16 @@
       <div class="logo">
         <h1>Library App</h1>
       </div>
+      <div class="addBookContainer">
+        <div class="addBook fa-beat" style="--fa-animation-duration: 2s">
+          <i
+            class="fa-regular fa-plus fa-beat"
+            style="--fa-animation-duration: 2s"
+          ></i>
+        </div>
+      </div>
       <div class="nav-links">
-        <button class="addBook" id="addBook">New Book</button>
+        <button class="logIn" id="logIn">Log In</button>
       </div>
     </div>
     <div class="grid-container">
@@ -38,11 +46,40 @@
           <p id="read">Read</p>
         </div>
         <div class="card-footer">
-          <button class="read">Read</button>
-          <button class="delete">Delete</button>
+          <button class="btn-read">Read</button>
+          <button class="btn-delete">Delete</button>
+        </div>
+      </div>
+      <div class="card book-card">
+        <div class="card-header">
+          <h2 id="title">Book Title</h2>
+        </div>
+        <div class="card-body">
+          <p id="author">Author</p>
+          <p id="pageCount">Pages</p>
+          <p id="read">Read</p>
+        </div>
+        <div class="card-footer">
+          <button class="btn-read">Read</button>
+          <button class="btn-delete">Delete</button>
+        </div>
+      </div>
+      <div class="card book-card">
+        <div class="card-header">
+          <h2 id="title">Book Title</h2>
+        </div>
+        <div class="card-body">
+          <p id="author">Author</p>
+          <p id="pageCount">Pages</p>
+          <p id="read">Read</p>
+        </div>
+        <div class="card-footer">
+          <button class="btn-read">Read</button>
+          <button class="btn-delete">Delete</button>
         </div>
       </div>
     </div>
+
     <!-- <div class="modal">
       <div class="modal-content">
         <div class="modal-header">

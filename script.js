@@ -1,7 +1,4 @@
 // DATA STRUCTURES
-
-const { ErrorMessage } = require("formik");
-
 // Book constructor
 class Book {
   // the constructor...
@@ -30,6 +27,9 @@ class Library {
 }
 
 const library = new Library();
+
+// User Interface
+const addBookButton = document.querySelector("#add-book");
 
 function addBookToLibrary() {
   // do stuff here
