@@ -62,16 +62,16 @@ const createBookCard = (newBook) => {
   const bookPageCount = document.createElement("p");
   const buttonGroup = document.createElement("div");
   const readButton = document.createElement("button");
-  const deleteButton = document.createElement("button");
+  const deleteCardButton = document.createElement("button");
 
   // Add classes to the book card
   bookCard.classList.add("book-card");
   buttonGroup.classList.add("button-group");
-  readButton.classList.add("btn");
-  deleteButton.classList.add("btn");
+  readButton.classList.add("btn-read");
+  deleteCardButton.classList.add("btn-delete");
   bookAuthor.classList.add("author");
-  readButton.onclick = toggleRead;
-  deleteButton.onclick = deleteBook;
+  // readButton.onclick = toggleRead;
+  deleteCardButton.onclick = deleteBook;
 
   let bookElement = document.createElement("li");
 
@@ -81,7 +81,6 @@ const createBookCard = (newBook) => {
   let pageCountContent = document.createTextNode(
     "Page Count: " + newBook.pageCount
   );
-  let deleteButtonContent = document.createTextNode("Delete");
 
   if (newBook.read) {
     readButton.textContent = "Read";
@@ -91,9 +90,12 @@ const createBookCard = (newBook) => {
     readButton.classList.add("btn-danger");
   }
 
+  deleteCardButton.textContent = "Delete";
+
   // Append the book card to the DOM
   buttonGroup.appendChild(readButton);
-  buttonGroup.appendChild(deleteButton);
+  buttonGroup.appendChild(deleteCardButton);
+
   bookCard.appendChild(bookTitle);
   bookTitle.appendChild(titleContent);
   bookCard.appendChild(bookAuthor);
@@ -133,27 +135,21 @@ const closeAddBookModal = () => {
 //   closeAddBookModal();
 // };
 
+const deleteBook = (e) => {
+  console.log("delete book");
+};
 // User Interface
 const addBookButton = document.querySelector("#addBook");
 const bookContainer = document.querySelector(".grid-container");
 const addBookModal = document.querySelector("#modal");
 const cancelButton = document.querySelector(".cancel");
 const addButton = document.querySelector(".add-book-btn");
+// const deleteButton = document.querySelector(".btn-delete");
+// const readButton = document.querySelector(".btn-read");
 
 addBookButton.addEventListener("click", openAddBookModal);
 cancelButton.addEventListener("click", closeAddBookModal);
 addButton.addEventListener("click", addBookToLibrary, closeAddBookModal);
+// deleteButton.addEventListener("click", deleteBook);
 
-const deleteBook = (e) => {
-  const title = e.target.parentNode.parentNode.firstChild.innerHTML.replaceAll(
-    " ",
-    ""
-  );
-};
-
-const toggleRead = (e) => {
-  const title = e.target.parentNode.parentNode.firstChild.innerHTML.replaceAll(
-    " ",
-    ""
-  );
-};
+const toggleRead = (e) => {};
