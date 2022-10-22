@@ -34,10 +34,11 @@ function addBookToLibrary(event) {
   let read = document.querySelector("#read").checked;
 
   let newBook = new Book(title, author, pageCount, read);
-
   books.push(newBook);
 
   createBookCard(newBook);
+
+  // set dataset to the index of the book in the array
 
   // Clear the input fields
   document.querySelector("#title").value = "";
@@ -54,9 +55,12 @@ function displayBooks() {
   // do stuff here
 }
 
-const createBookCard = (newBook) => {
+const createBookCard = () => {
   // Variables for the book card
   const bookCard = document.createElement("div");
+  bookCard.classList.add("book");
+  // bookCard.setAttribute("data-index", `${i}`);
+
   const bookTitle = document.createElement("h3");
   const bookAuthor = document.createElement("h4");
   const bookPageCount = document.createElement("p");
@@ -70,10 +74,7 @@ const createBookCard = (newBook) => {
   readButton.classList.add("btn-read");
   deleteCardButton.classList.add("btn-delete");
   bookAuthor.classList.add("author");
-  // readButton.onclick = toggleRead;
   deleteCardButton.onclick = deleteBook;
-
-  let bookElement = document.createElement("li");
 
   // Add text to the book card
   let titleContent = document.createTextNode("Title: " + newBook.title);
@@ -92,6 +93,8 @@ const createBookCard = (newBook) => {
 
   deleteCardButton.textContent = "Delete";
 
+  books.push(newBook);
+
   // Append the book card to the DOM
   buttonGroup.appendChild(readButton);
   buttonGroup.appendChild(deleteCardButton);
@@ -104,7 +107,22 @@ const createBookCard = (newBook) => {
   bookPageCount.appendChild(pageCountContent);
   bookCard.appendChild(buttonGroup);
   bookContainer.appendChild(bookCard);
+
+  readButton.addEventListener("click", () => {
+    if (readButton.textContent === "Read") {
+      readButton.textContent = "Not Read";
+      readButton.classList.remove("btn-success");
+      readButton.classList.add("btn-danger");
+      newBook.read = "false";
+    } else {
+      readButton.textContent = "Read";
+      readButton.classList.remove("btn-danger");
+      readButton.classList.add("btn-success");
+      newBook.read = "true";
+    }
+  });
 };
+// update book status
 
 const openAddBookModal = () => {
   addBookModal.classList.add("active");
@@ -135,21 +153,19 @@ const closeAddBookModal = () => {
 //   closeAddBookModal();
 // };
 
-const deleteBook = (e) => {
-  console.log("delete book");
-};
+const deleteBook = (e) => {};
+
 // User Interface
 const addBookButton = document.querySelector("#addBook");
 const bookContainer = document.querySelector(".grid-container");
 const addBookModal = document.querySelector("#modal");
 const cancelButton = document.querySelector(".cancel");
 const addButton = document.querySelector(".add-book-btn");
-// const deleteButton = document.querySelector(".btn-delete");
+// const deleteButton = document.querySelector("btn-delete");
 // const readButton = document.querySelector(".btn-read");
 
 addBookButton.addEventListener("click", openAddBookModal);
 cancelButton.addEventListener("click", closeAddBookModal);
-addButton.addEventListener("click", addBookToLibrary, closeAddBookModal);
+addButton.addEventListener("click", addBookToLibrary);
 // deleteButton.addEventListener("click", deleteBook);
-
-const toggleRead = (e) => {};
+// readButton.addEventListener("click", toggleRead);
