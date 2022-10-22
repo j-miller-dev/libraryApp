@@ -20,26 +20,33 @@ class Library {
   constructor() {
     this.books = [];
   }
-  // add a book to the library
-  addBookToLibrary() {}
-  // remove a book from the library
-  removeBook() {}
 }
 
 const library = new Library();
 
-// User Interface
-const addBookButton = document.querySelector("#add-book");
+let books = [];
 
-function addBookToLibrary() {
+function addBookToLibrary(event) {
   // do stuff here
   let title = document.querySelector("#title").value;
   let author = document.querySelector("#author").value;
   let pageCount = document.querySelector("#pageCount").value;
   let read = document.querySelector("#read").checked;
+
   let newBook = new Book(title, author, pageCount, read);
-  this.books.push(newBook);
-  console.log(this.books);
+
+  books.push(newBook);
+
+  createBookCard(newBook);
+
+  // Clear the input fields
+  document.querySelector("#title").value = "";
+  document.querySelector("#author").value = "";
+  document.querySelector("#pageCount").value = "";
+  document.querySelector("#read").checked = false;
+
+  // Close the modal
+  addBookModal.classList.remove("active");
 }
 
 // Loop through array and display each book on the page
@@ -47,7 +54,7 @@ function displayBooks() {
   // do stuff here
 }
 
-const createBookCard = (book) => {
+const createBookCard = (newBook) => {
   // Variables for the book card
   const bookCard = document.createElement("div");
   const bookTitle = document.createElement("h3");
@@ -62,16 +69,21 @@ const createBookCard = (book) => {
   buttonGroup.classList.add("button-group");
   readButton.classList.add("btn");
   deleteButton.classList.add("btn");
+  bookAuthor.classList.add("author");
   readButton.onclick = toggleRead;
   deleteButton.onclick = deleteBook;
 
-  // Add text to the book card
-  bookTitle.textContent = `${book.bookTitle}`;
-  author.textContent = `by ${book.bookAuthor}`;
-  pageCount.textContent = `${book.bookPageCount} pages`;
-  deleteButton.textContent = "Delete";
+  let bookElement = document.createElement("li");
 
-  if (book.read) {
+  // Add text to the book card
+  let titleContent = document.createTextNode("Title: " + newBook.title);
+  let authorContent = document.createTextNode("Author: " + newBook.author);
+  let pageCountContent = document.createTextNode(
+    "Page Count: " + newBook.pageCount
+  );
+  let deleteButtonContent = document.createTextNode("Delete");
+
+  if (newBook.read) {
     readButton.textContent = "Read";
     readButton.classList.add("btn-success");
   } else {
@@ -83,34 +95,60 @@ const createBookCard = (book) => {
   buttonGroup.appendChild(readButton);
   buttonGroup.appendChild(deleteButton);
   bookCard.appendChild(bookTitle);
+  bookTitle.appendChild(titleContent);
   bookCard.appendChild(bookAuthor);
+  bookAuthor.appendChild(authorContent);
   bookCard.appendChild(bookPageCount);
+  bookPageCount.appendChild(pageCountContent);
   bookCard.appendChild(buttonGroup);
   bookContainer.appendChild(bookCard);
 };
 
-const getBookFromInput = () => {
-  const bookTitle = document.querySelector("#title").value;
-  const bookAuthor = document.querySelector("#author").value;
-  const bookPageCount = document.querySelector("#pageCount").value;
-  const read = document.querySelector("#read").checked;
-
-  return new Book(bookTitle, bookAuthor, bookPageCount, read);
+const openAddBookModal = () => {
+  addBookModal.classList.add("active");
 };
 
-const addBook = (e) => {
-  e.preventDefault();
-  const book = getBookFromInput();
-  library.addBook(book);
-  createBookCard(book);
+const closeAddBookModal = () => {
+  addBookModal.classList.remove("active");
 
-  if (library.isInLibrary(newBook)) {
-    errorMessage.textContent = "This book is already in your library";
-    errorMessage.classList.add("active");
-    return;
-  }
+  // Clear the input fields
+  document.querySelector("#title").value = "";
+  document.querySelector("#author").value = "";
+  document.querySelector("#pageCount").value = "";
+  document.querySelector("#read").checked = false;
+};
 
-  closeAddBookModal();
+// const addBook = (e) => {
+//   e.preventDefault();
+//   const book = getBookFromInput();
+//   library.addBook(book);
+//   createBookCard(book);
+
+//   if (library.isInLibrary(newBook)) {
+//     errorMessage.textContent = "This book is already in your library";
+//     errorMessage.classList.add("active");
+//     return;
+//   }
+
+//   closeAddBookModal();
+// };
+
+// User Interface
+const addBookButton = document.querySelector("#addBook");
+const bookContainer = document.querySelector(".grid-container");
+const addBookModal = document.querySelector("#modal");
+const cancelButton = document.querySelector(".cancel");
+const addButton = document.querySelector(".add-book-btn");
+
+addBookButton.addEventListener("click", openAddBookModal);
+cancelButton.addEventListener("click", closeAddBookModal);
+addButton.addEventListener("click", addBookToLibrary, closeAddBookModal);
+
+const deleteBook = (e) => {
+  const title = e.target.parentNode.parentNode.firstChild.innerHTML.replaceAll(
+    " ",
+    ""
+  );
 };
 
 const toggleRead = (e) => {
