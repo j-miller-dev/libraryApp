@@ -32,25 +32,22 @@
         <button class="logIn" id="logIn">Log In</button>
       </div>
     </div>
-    <div class="grid-container">
-      <div class="card book-card">
-        <div class="card-header">
-          <h2 id="title">Book Title</h2>
-        </div>
-        <div class="card-body">
-          <p id="author">Author</p>
-          <p id="pageCount">Pages</p>
-          <p id="read">Read</p>
-        </div>
-        <div class="card-footer">
-          <button class="btn-read">Read</button>
+    <!-- BOOK CONTAINER -->
+    <div class="grid-container" id="library-container">
+      <!--  BOOK TEMPLATE -->
+      <template id="newBook">
+        <div class="Book" data-num="" data-read="">
+          <p class="BookTitle" id="title">Book Title</p>
+          <p class="BookAuthor" id="author">Author</p>
+          <p class="BookPages" id="pageCount">Pages</p>
+          <button class="hasRead" id="btn-read">Not read yet</button>
           <button id="btn-delete" class="btn-delete">Delete</button>
         </div>
-      </div>
+      </template>
     </div>
     <div class="modal" id="modal">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header" id="modal-header">
           <h2>Add New Book</h2>
         </div>
         <div class="modal-body">
@@ -62,12 +59,12 @@
             <label for="pages">Pages</label>
             <input type="number" id="pageCount" />
             <label for="read">Read</label>
-            <input type="checkbox" id="read" />
+            <input type="checkbox" id="myCheck" />
           </form>
         </div>
         <div class="modal-footer">
           <button id="cancel-btn" class="cancel">Cancel</button>
-          <button class="add-book-btn">Add</button>
+          <button class="add-book-btn" id="add-book-btn">Add</button>
         </div>
       </div>
     </div>

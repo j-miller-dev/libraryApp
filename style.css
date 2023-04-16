@@ -60,9 +60,13 @@ body {
 .logIn:hover {
   background-color: var(--white);
   color: var(--light-green);
-  border: 4px solid black);
+  border: 4px solid black;
   border: rgba(0, 0, 0, 1);
   transform: scale(1.1);
+}
+
+.Book[data-read="true"] .HasRead {
+  background: green;
 }
 
 .grid-container {
@@ -76,7 +80,7 @@ body {
 
 .modal {
   position: fixed;
-  
+
   width: 300px;
   height: 300px;
   background-color: var(--white);
@@ -87,7 +91,7 @@ body {
   z-index: 100;
 }
 
-.book-card {
+.Book {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -100,11 +104,12 @@ body {
   line-height: 1.2;
   height: 300px;
   width: 250px;
+  text-align: center;
 }
 
 .button-group {
   display: flex;
-  justify-content: space-around
+  justify-content: space-around;
 }
 
 .btn {
@@ -120,11 +125,8 @@ body {
   background-color: var(--light-red);
 }
 
-
-
 .addBookContainer {
   display: sticky;
-  
 }
 
 .addBook {
@@ -181,9 +183,22 @@ body {
   align-items: center;
   width: 100%;
   height: 100%;
-  
 }
 
 .active {
   display: flex;
+}
+
+.Book .hasRead {
+  background: red;
+  color: white;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.Book[data-read="true"] .hasRead {
+  background: green;
+}
+.Book[data-read="false"] .hasRead {
+  background: red;
 }
